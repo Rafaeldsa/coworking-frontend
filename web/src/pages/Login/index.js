@@ -40,6 +40,7 @@ function Login() {
 
       localStorage.setItem('email', email);
       localStorage.setItem('authorization', response.data.token);
+      localStorage.setItem('userId', response.data.userId);
 
       history.push('/list-workstations');
     } catch (err) {
