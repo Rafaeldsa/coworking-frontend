@@ -11,12 +11,13 @@ import WorkStationItem from '../../components/WorksStationItem';
 function WorkStationList() {
   const [workstations, setWorkstations] = useState([]);
 
+  const authorization_user = localStorage.getItem('authorization');
+
   useEffect(() => {
     async function loadingWorkStations() {
-      const response = await api.get('workstations', {
+      const response = await api.get('workstations/list', {
         headers: {
-          authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbGRhbnRhczQ2MUBnbWFpbC5jb20iLCJpYXQiOjE1OTc0MzA2NDQsImV4cCI6MTU5ODAzNTQ0NH0.aPXrSxLf9uQ8x_dQeyyEY0mrmMpyGzU4PYI_bczeJsc',
+          authorization: authorization_user,
         },
       });
 
@@ -28,10 +29,13 @@ function WorkStationList() {
 
   return (
     <div id="page-workstations" className="container">
-      <PageHeader title="Cadastro" description="Edite suas informações!">
+      <PageHeader
+        title="Lista de WorkStations"
+        description="Aqqui está a listagem de WorkStations"
+      >
         <Link>WorkStations</Link>
-        <Link>Listar Usuários</Link>
-        <Link>Editar informações de usuário</Link>
+        <Link to="/list-users">Listar Usuários</Link>
+        <Link to="/editing-user">Editar informações de usuário</Link>
       </PageHeader>
 
       <ul>

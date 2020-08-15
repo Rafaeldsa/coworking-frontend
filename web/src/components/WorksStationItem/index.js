@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 import './styles.css';
 
 const WorkStationItem = ({ workstation }) => {
   const [workStationId, setWorkStationId] = useState(workstation.id);
-
-  const path = ``;
 
   return (
     <article className="workstation-item">
@@ -19,8 +18,7 @@ const WorkStationItem = ({ workstation }) => {
       <p>{workstation.description}</p>
 
       <footer>
-        <Link>Agendar workstation</Link>
-        <Link>Editar workstation</Link>
+        <button>Agendar WorkStation</button>
       </footer>
     </article>
   );

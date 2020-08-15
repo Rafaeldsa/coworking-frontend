@@ -8,10 +8,6 @@ const PageHeader = (props) => {
     <header className="page-header">
       <div className="container">
         <h1>CoWorking</h1>
-
-        <Link id="button" to="/">
-          Logout
-        </Link>
       </div>
 
       <div className="header-content">
