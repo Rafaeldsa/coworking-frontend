@@ -8,6 +8,8 @@ import './styles.css';
 const WorkStationItem = ({ workstation }) => {
   const [workStationId, setWorkStationId] = useState(workstation.id);
 
+  const path = `/workstation/${workstation.id}`;
+
   return (
     <article className="workstation-item">
       <header>
@@ -18,7 +20,7 @@ const WorkStationItem = ({ workstation }) => {
       <p>{workstation.description}</p>
 
       <footer>
-        <button>Agendar WorkStation</button>
+        <Link to={path}>Agendar WorKstation</Link>
       </footer>
     </article>
   );

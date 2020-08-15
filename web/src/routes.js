@@ -13,7 +13,7 @@ function Routes() {
     <BrowserRouter>
       <Route path="/" component={Login} exact />
       <Route path="/editing-user" component={InfoUser} />
-      <Route path="/workstation" component={CRUDWorkStation} exact />
+      <Route path="/workstation/:id" component={CRUDWorkStation} exact />
       <Route path="/list-workstations" component={WorkStationsList} />
       <Route path="/list-users" component={UserList} />
     </BrowserRouter>

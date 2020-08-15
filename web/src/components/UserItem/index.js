@@ -11,25 +11,32 @@ const UserItem = ({ user }) => {
   const authorization_user = localStorage.getItem('authorization');
 
   useEffect(() => {
-    api
-      .post(`user/${user.id}`, data, {
-        headers: {
-          authorization: authorization_user,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      });
+    try {
+      api
+        .post('user/', admin, {
+          params: {
+            id: user.id,
+          },
+          headers: {
+            authorization: authorization_user,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }, [admin]);
 
   async function changeAdmin() {
-    if (admin === 1) {
+    if (admin == 1) {
       setAdmin(0);
     } else {
       setAdmin(1);
     }
   }
-
+  console.log();
   return (
     <article className="workstation-item">
       <header>
@@ -39,10 +46,10 @@ const UserItem = ({ user }) => {
       </header>
       <h2>Data de Nascimento: {user.data_nascimento}</h2>
       <h2>Endereço: {user.endereco_pessoal}</h2>
-      <h2>Admin: {admin}</h2>
+      <h2>Admin: {admin} </h2>
       <h1>Biografia: {user.biografia}</h1>
 
-      <button>Tornar Admin</button>
+      <button onClick={changeAdmin}>Tornar Admin</button>
     </article>
   );
 };
