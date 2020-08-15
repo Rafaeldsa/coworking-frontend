@@ -2,24 +2,27 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Input from '../../components/Input';
-import api from '../../services/api';
+import axios from 'axios';
 
 import './styles.css';
 import PageHeader from '../../components/PageHeader';
 import Select from '../../components/Select';
 
-function CRUDWorkStation({ match }) {
+function CRUDMeeting({ match }) {
   const [schedules, setSchedules] = useState([]);
-
+  const [creator, setCreator] = useState('');
+  const [room_id, setRoomId] = useState(0);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const history = useHistory();
 
   const body = {
-    name,
+    creator,
     description,
-    schedule: schedules,
+    name,
+    room_id,
+    schedules,
   };
   const authorization_user = localStorage.getItem('authorization');
 
@@ -28,7 +31,7 @@ function CRUDWorkStation({ match }) {
   };
 
   function addNewScheduleItem() {
-    setSchedules([...schedules, { week_day: '0', from: '', to: '' }]);
+    setSchedules([...schedules, { from: '', to: '' }]);
   }
 
   function setScheduleItemValue(position, field, value) {
@@ -46,10 +49,16 @@ function CRUDWorkStation({ match }) {
   function handleSave(e) {
     e.preventDefault();
 
-    api
-      .post('http://localhost:3001/create-workstation/', body, { headers })
+    axios
+      .post(
+        'http://localhost:3001/meeting',
+        {
+          body,
+        },
+        { headers }
+      )
       .then(() => {
-        alert('Alterações realizadas com sucesso!');
+        alert('Reunião criada com sucesso!');
 
         history.goBack();
       })
@@ -58,18 +67,26 @@ function CRUDWorkStation({ match }) {
       });
   }
 
+  console.log(body);
+
   return (
-    <div id="page-crudWs" className="container">
-      <PageHeader title="WorkStation CRUD">
-        <Link to="/workstations">WorkStations</Link>
-        <Link to="/list-users">Listar Usuários</Link>
-        <Link to="/editing-user">Editar informações de usuário</Link>
+    <div id="page-crudMeeting" className="container">
+      <PageHeader title="Criar Reunião">
+        <Link className="button" to="/list-workstations">
+          WorkStations
+        </Link>
+        <Link className="button" to="/list-users">
+          Listar Usuários
+        </Link>
+        <Link className="button" to="/editing-user">
+          Editar informações de usuário
+        </Link>
       </PageHeader>
 
       <main>
         <form onSubmit={handleSave}>
           <fieldset>
-            <legend>Criar nova WorkStation</legend>
+            <legend>Criar nova Reuniao</legend>
             <Input
               name="name"
               label="Nome"
@@ -81,6 +98,18 @@ function CRUDWorkStation({ match }) {
               label="Descrição"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+            />
+            <Input
+              name="name"
+              label="Nome do criador da reunião"
+              value={creator}
+              onChange={(e) => setCreator(e.target.value)}
+            />
+            <Input
+              name="name"
+              label="ID da reunião"
+              value={room_id}
+              onChange={(e) => setRoomId(Number(e.target.value))}
             />
           </fieldset>
 
@@ -94,24 +123,7 @@ function CRUDWorkStation({ match }) {
 
             {schedules.map((scheduleItem, index) => {
               return (
-                <div key={scheduleItem.week_day} className="schedule-item">
-                  <Select
-                    name="week_day"
-                    label="Dia da semana"
-                    onChange={(e) =>
-                      setScheduleItemValue(index, 'week_day', e.target.value)
-                    }
-                    value={scheduleItem.week_day}
-                    options={[
-                      { value: '0', label: 'Domingo' },
-                      { value: '1', label: 'Segunda-feira' },
-                      { value: '2', label: 'Terça-feira' },
-                      { value: '3', label: 'Quarta-feira' },
-                      { value: '4', label: 'Quinta-feira' },
-                      { value: '5', label: 'Sexta-feira' },
-                      { value: '6', label: 'Sábado' },
-                    ]}
-                  />
+                <div key={index} className="schedule-item">
                   <Input
                     name="from"
                     label="Das"
@@ -144,4 +156,4 @@ function CRUDWorkStation({ match }) {
   );
 }
 
-export default CRUDWorkStation;
+export default CRUDMeeting;

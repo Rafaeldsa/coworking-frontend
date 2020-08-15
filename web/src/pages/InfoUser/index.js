@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-import { Link, useStory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import Textarea from '../../components/TextArea';
-import styles from './styles.css';
+import './styles.css';
 import PageHeader from '../../components/PageHeader';
 import api from '../../services/api';
+import axios from 'axios';
 
 function InfoUser() {
   const [email, setEmail] = useState('');
@@ -15,10 +16,37 @@ function InfoUser() {
   const [endereco, setEndereco] = useState('');
   const [biografia, setBiografia] = useState('');
 
-  async function handleSave(e) {
-    e.preventDefault();
+  const history = useHistory();
 
-    const response = await api.post('');
+  const id = localStorage.getItem('userId');
+
+  const authorization_user = localStorage.getItem('authorization');
+
+  const body = {
+    nome: name,
+    data_nascimento: data,
+    cpf,
+    endereco_pessoal: endereco,
+    biografia,
+    email,
+  };
+
+  const headers = {
+    authorization: authorization_user,
+  };
+
+  function handleSave(e) {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:3001/user/${id}`, body, { headers })
+      .then(() => {
+        alert('Alterações realizadas!');
+
+        history.push('/list-workstations');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -26,7 +54,6 @@ function InfoUser() {
       <PageHeader title="Cadastro" description="Edite suas informações!">
         <Link to="/list-workstations">WorkStations</Link>
         <Link to="/list-users">Listar Usuários</Link>
-        <Link>Editar informações de usuário</Link>
       </PageHeader>
 
       <main>

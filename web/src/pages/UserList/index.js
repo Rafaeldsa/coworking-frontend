@@ -33,7 +33,9 @@ function UserList() {
         title="Lista de Usuários"
         description="Aqui está a listagem de Usuários"
       >
-        <Link to="/editing-user">Editar suas informações de usuário</Link>
+        <Link className="button" to="/editing-user">
+          Editar suas informações de usuário
+        </Link>
       </PageHeader>
 
       <ul>

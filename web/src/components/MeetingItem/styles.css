@@ -1,23 +1,23 @@
-.user-item {
+.meeting-item {
   background: var(--color-box-base);
   border: 1px solid var(--color-line-in-white);
   border-radius: 0.8rem;
-  margin-top: 2.4rem;
+  margin-top: 10vh;
   margin-bottom: 2.4rem;
   overflow: hidden;
 }
 
-.user-item header {
+.meeting-item header {
   padding: 3.2rem 2rem;
   display: flex;
   align-items: center;
 }
 
-.user-item header div {
+.meeting-item header div {
   margin-left: 2.4rem;
 }
 
-.user-item footer {
+.meeting-item footer {
   padding: 3.2rem 2rem;
   background: var(--color-box-footer);
   border-top: 1px solid var(--color-line-in-white);
@@ -27,7 +27,7 @@
   justify-content: space-between;
 }
 
-.user-item footer button {
+.meeting-item footer button {
   width: 100%;
   height: 5.6rem;
   background: var(--color-secundary);
@@ -44,6 +44,6 @@
   margin-top: 3.2rem;
 }
 
-.user-item footer button:hover {
+.meeting-item footer button:hover {
   background: var(--color-secundary-dark);
 }

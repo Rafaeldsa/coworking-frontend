@@ -33,18 +33,26 @@ function WorkStationList() {
         title="Lista de WorkStations"
         description="Aqqui está a listagem de WorkStations"
       >
-        <Link>WorkStations</Link>
-        <Link to="/list-users">Listar Usuários</Link>
-        <Link to="/editing-user">Editar informações de usuário</Link>
-      </PageHeader>
+        <Link className="button" to="/list-users">
+          Listar Usuários
+        </Link>
+        <Link className="button" to="/list-meetings">
+          Listar Reuniões
+        </Link>
 
-      <ul>
-        {workstations.map((workstation) => {
-          return (
-            <WorkStationItem key={workstation.id} workstation={workstation} />
-          );
-        })}
-      </ul>
+        <Link className="button" to="/editing-user">
+          Editar informações
+        </Link>
+      </PageHeader>
+      <div>
+        <ul>
+          {workstations.map((workstation) => {
+            return (
+              <WorkStationItem key={workstation.id} workstation={workstation} />
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

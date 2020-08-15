@@ -38,7 +38,7 @@ const UserItem = ({ user }) => {
   }
   console.log();
   return (
-    <article className="workstation-item">
+    <article className="user-item">
       <header>
         <div>
           <h1>Nome: {user.nome}</h1>
@@ -49,7 +49,9 @@ const UserItem = ({ user }) => {
       <h2>Admin: {admin} </h2>
       <h1>Biografia: {user.biografia}</h1>
 
-      <button onClick={changeAdmin}>Tornar Admin</button>
+      <footer>
+        <button onClick={changeAdmin}>Tornar Admin</button>
+      </footer>
     </article>
   );
 };

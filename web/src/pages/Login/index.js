@@ -6,7 +6,7 @@ import api from '../../services/api';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 
-import styles from './styles.css';
+import './styles.css';
 
 function Login() {
   const [email, setEmail] = useState('');
